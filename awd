@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+void getArray(int[], int&);
+void sortArray(int[], int);
+int numberOfPair(int[], int);
+
+int main()
+{
+	int a[10000];
+	int n;
+	getArray(a, n);
+	if (n < 10000)
+	{
+		sortArray(a, n);
+		int kq = numberOfPair(a, n);
+		cout << kq;
+	}
+}
+void getArray(int a[], int& n)
+{
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+}
+void sortArray(int a[], int n)
+{
+	for (int i = 0; i < n - 1; i++)
+		for (int j = i + 1; j < n; j++)
+			if (a[i] > a[j])
+				swap(a[i], a[j]);
+}
+int numberOfPair(int a[], int n)
+{
+	int pairs = 0;
+	int j = 0;
+	while (j < n)
+	{
+		int i = j;
+		int dem = 0;
+		while (a[i] == a[j])
+		{
+			dem++;
+			i++;
+		}
+		pairs += dem / 2;
+		j = i;
+	}
+	return pairs;
+}
